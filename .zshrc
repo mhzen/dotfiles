@@ -5,7 +5,6 @@ fi
 
 # vim-y stuff
 EDITOR=nvim
-bindkey -v
 
 # history
 if (( ! ${+HISTFILE} )) typeset -g HISTFILE=${ZDOTDIR:-${HOME}}/.zhistory
@@ -72,20 +71,20 @@ function plugin-update {
 }
 
 plug=(
-    romkatv/powerlevel10k
-    skywind3000/z.lua
-    peterhurford/up.zsh
-    zsh-users/zsh-completions
-    zdharma-continuum/fast-syntax-highlighting
-    zsh-users/zsh-history-substring-search
-    zsh-users/zsh-autosuggestions
+  romkatv/powerlevel10k
+  skywind3000/z.lua
+  peterhurford/up.zsh
+  zsh-users/zsh-completions
+  zdharma-continuum/fast-syntax-highlighting
+  zsh-users/zsh-history-substring-search
+  zsh-users/zsh-autosuggestions
 )
 
 plugin-load $plug
 
 # aliases
-alias zshcfg="vim ~/.zshrc"
-alias zshres="exec zsh"
+alias ze="${EDITOR} ~/.zshrc"
+alias zr="exec zsh"
 if (( ${+commands[aria2c]} )); then
   alias get='aria2c --max-connection-per-server=5 --continue'
 elif (( ${+commands[axel]} )); then
@@ -94,35 +93,10 @@ elif (( ${+commands[wget]} )); then
   alias get='wget --continue --progress=bar --timestamping'
 fi
 
-# colors
-if (( terminfo[colors] >= 8 )); then
-  # grep colours
-  if (( ! ${+GREP_COLOR} )) export GREP_COLOR='37;45'               #BSD
-  if (( ! ${+GREP_COLORS} )) export GREP_COLORS="mt=${GREP_COLOR}"  #GNU
-  if [[ ${OSTYPE} == openbsd* ]]; then
-    if (( ${+commands[ggrep]} )) alias grep='ggrep --color=auto'
-  else
-    alias grep='grep --color=auto'
-  fi
-
-  # less colours
-  if (( ${+commands[less]} )); then
-    if (( ! ${+LESS_TERMCAP_mb} )) export LESS_TERMCAP_mb=$'\E[1;31m'   # Begins blinking.
-    if (( ! ${+LESS_TERMCAP_md} )) export LESS_TERMCAP_md=$'\E[1;31m'   # Begins bold.
-    if (( ! ${+LESS_TERMCAP_me} )) export LESS_TERMCAP_me=$'\E[0m'      # Ends mode.
-    if (( ! ${+LESS_TERMCAP_se} )) export LESS_TERMCAP_se=$'\E[27m'     # Ends standout-mode.
-    if (( ! ${+LESS_TERMCAP_so} )) export LESS_TERMCAP_so=$'\E[7m'      # Begins standout-mode.
-    if (( ! ${+LESS_TERMCAP_ue} )) export LESS_TERMCAP_ue=$'\E[0m'      # Ends underline.
-    if (( ! ${+LESS_TERMCAP_us} )) export LESS_TERMCAP_us=$'\E[1;32m'   # Begins underline.
-  fi
-else
-  # See https://no-color.org
-  export NO_COLOR=1
-fi
-
 # path
-path+=('~/.local/bin')
+path+=('${HOME}/.local/bin')
 export PATH
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
