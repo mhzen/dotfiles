@@ -3,9 +3,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# vim-y stuff
-EDITOR=nvim
-
 # history
 if (( ! ${+HISTFILE} )) typeset -g HISTFILE=${ZDOTDIR:-${HOME}}/.zhistory
 HISTSIZE=20000
@@ -17,6 +14,7 @@ setopt SHARE_HISTORY
 
 # misc
 setopt INTERACTIVE_COMMENTS
+EDITOR=nvim
 
 # completion
 autoload -U compinit
@@ -41,7 +39,7 @@ bindkey '\C-x\C-e' edit-command-line
 ZPLUGINDIR=${ZPLUGINDIR:-${ZDOTDIR:-$HOME/.config/zsh}/plugins}
 
 # clone a plugin, identify its init file, source it, and add it to your fpath
-function plugin-load {
+function plug-load {
   local repo plugin_name plugin_dir initfile initfiles
   for repo in $@; do
     plugin_name=${repo:t}
@@ -62,7 +60,7 @@ function plugin-load {
 }
 
 # plugin update function
-function plugin-update {
+function plug-up {
   ZPLUGINDIR=${ZPLUGINDIR:-$HOME/.config/zsh/plugins}
   for d in $ZPLUGINDIR/*/.git(/); do
     echo "Updating ${d:h:t}..."
@@ -80,7 +78,7 @@ plug=(
   zsh-users/zsh-autosuggestions
 )
 
-plugin-load $plug
+plug-load ${plug}
 
 # aliases
 alias ze="${EDITOR} ~/.zshrc"
@@ -92,10 +90,13 @@ elif (( ${+commands[axel]} )); then
 elif (( ${+commands[wget]} )); then
   alias get='wget --continue --progress=bar --timestamping'
 fi
+alias ofm="exo-open --launch FileManager "$(pwd)""
 
 # path
-path+=('${HOME}/.local/bin')
+path+=('/home/zen/.local/bin')
+path+=('/home/zen/.cargo/bin')
 export PATH
+export GPG_TTY=$(tty)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
