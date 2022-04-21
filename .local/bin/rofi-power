@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+uptime=$(uptime -p)
+
+power_off=' Shutdown'
+reboot='菱 Restart'
+lock=' Lock'
+suspend='鈴 Sleep'
+log_out=' Log Out'
+
+chosen=$(printf '%s\n%s\n%s\n%s\n%s' "$power_off" "$reboot" "$lock" "$suspend" "$log_out" | \
+  rofi -theme-str '#listview {lines: 5;} #window {height: 30%; width: 18%;}' -dmenu -p " Power" -selected-row 2)
+
+case "$chosen" in
+  "$power_off") poweroff ;;
+  "$reboot") reboot ;;
+  "$lock") i3lock-blur ;;
+  "$suspend") suspend ;;
+  "$log_out") i3-msg exit ;;
+  *) exit 1 ;;
+esac

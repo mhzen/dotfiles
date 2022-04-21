@@ -23,7 +23,7 @@
   # available, otherwise `xterm-256color` is used.
   #TERM: alacritty
 
-window:
+# window:
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. The number of columns
@@ -78,7 +78,7 @@ window:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  startup_mode: Maximized
+  # startup_mode: Maximized
 
   # Window title
   #title: Alacritty
@@ -117,7 +117,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: JetBrains Mono NF
+    family: CaskaydiaCove NF
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
@@ -188,12 +188,50 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
-# Colors (Tomorrow Night)
+# Catppuccin!
 colors:
-   #Default colors
+  # Default colors
   primary:
-    background: '#1d1f21'
-    foreground: '#c5c8c6'
+    background: '0x1E1D2F'
+    foreground: '0xD9E0EE'
+
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x1E1D2F'
+    cursor: '0xF5E0DC'
+
+  # Normal colors
+  normal:
+    black:   '0x6E6C7E'
+    red:     '0xF28FAD'
+    green:   '0xABE9B3'
+    yellow:  '0xFAE3B0'
+    blue:    '0x96CDFB'
+    magenta: '0xF5C2E7'
+    cyan:    '0x89DCEB'
+    white:   '0xD9E0EE'
+
+  # Bright colors
+  bright:
+    black:   '0x988BA2'
+    red:     '0xF28FAD'
+    green:   '0xABE9B3'
+    yellow:  '0xFAE3B0'
+    blue:    '0x96CDFB'
+    magenta: '0xF5C2E7'
+    cyan:    '0x89DCEB'
+    white:   '0xD9E0EE'
+
+  indexed_colors:
+    - { index: 16, color: '0xF8BD96' }
+    - { index: 17, color: '0xF5E0DC' }
+
+# Colors (Tomorrow Night)
+#colors:
+   # Default colors
+  #primary:
+    #background: '#1d1f21'
+    #foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
     #
@@ -381,16 +419,16 @@ colors:
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
 
-#cursor:
+cursor:
   # Cursor style
-  #style:
+  style:
     # Cursor shape
     #
     # Values for `shape`:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    #shape: Block
+    shape: Beam
 
     # Cursor blinking state
     #
@@ -399,7 +437,7 @@ colors:
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    #blinking: Off
+    blinking: On
 
   # Vi mode cursor style
   #

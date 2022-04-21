@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+pic=/tmp/i3lock.png
+maim $pic
+convert -blur 6x4 -level "0%,100%,0.6" -font "Caskaydia-Cove-Nerd-Font-Complete" -fill white -pointsize 60 -gravity center -draw "text 0,0 ''" $pic $pic
+i3lock -i $pic
+rm $pic

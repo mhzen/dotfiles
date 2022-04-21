@@ -21,43 +21,49 @@ opt.relativenumber = true
 opt.winblend = 10
 opt.termguicolors = true
 
--- set mapleader
-vim.g.mapleader = ","
-
 -- set keybinds
-vim.api.nvim_set_keymap("n", "<leader>.", "<Plug>(coc-codeaction)", {})
-vim.api.nvim_set_keymap("n", "<leader>l", ":CocCommand eslint.executeAutofix<CR>", {})
-vim.api.nvim_set_keymap("n", "gd", "<Plug>(coc-definition)", {silent = true})
-vim.api.nvim_set_keymap("n", "<C-K>", ":call CocActionAsync('doHover')<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>rn", "<Plug>(coc-rename)", {})
-vim.api.nvim_set_keymap("n", "<leader>f", ":CocCommand prettier.formatFile<CR>", {noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<CR>", {noremap = true})
-vim.api.nvim_set_keymap("n", "m<Down>", ":m .+1<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "m<Up>", ":m .-2<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader><Right>", ":BufferLineCycleNext<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader><Left>", ":BufferLineCyclePrev<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>x", ":bd<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("i", "<TAB>", "pumvisible() ? '<C-n>' : '<TAB>'", {noremap = true, silent = true, expr = true})
-vim.api.nvim_set_keymap("i", "<S-TAB>", "pumvisible() ? '<C-p>' : '<C-h>'", {noremap = true, expr = true})
-vim.api.nvim_set_keymap("i", "<C-Space>", "coc#refresh()", { silent = true, expr = true })
-vim.api.nvim_set_keymap("i", "<CR>", "pumvisible() ? coc#_select_confirm() : '<C-G>u<CR><C-R>=coc#on_enter()<CR>'", {silent = true, expr = true, noremap = true})
+vim.g.mapleader = " "
+local map = vim.api.nvim_set_keymap
+map("n", "<leader>.", "<Plug>(coc-codeaction)", {silent = true, noremap = true})
+map("n", "gd", "<Plug>(coc-definition)", {silent = true, noremap = true})
+map("n", "<C-K>", ":call CocActionAsync('doHover')<CR>", {silent = true, noremap = true})
+map("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true, noremap = true})
+map("n", "<leader>ff", ":Telescope find_files<CR>", {silent = true, noremap = true})
+map("n", "m<Down>", ":m .+1<CR>", {silent = true, noremap = true})
+map("n", "m<Up>", ":m .-2<CR>", {silent = true, noremap = true})
+map("n", "<leader><esc>", ":noh<CR>", {silent = true, noremap = true})
+map("n", "<leader>w", ":w<CR>", {silent = true, noremap = true})
+map("n", "<leader><Right>", ":BufferLineCycleNext<CR>", {silent = true, noremap = true})
+map("n", "<leader><Left>", ":BufferLineCyclePrev<CR>", {silent = true, noremap = true})
+map("n", "<leader>x", ":bd<CR>", {silent = true, noremap = true})
+map("n", "<leader>e", ":NvimTreeFocus<CR>", {silent = true, noremap = true})
+map("n", "<leader>q", ":NvimTreeClose<CR>", {silent = true, noremap = true})
+map("i", "<TAB>", "pumvisible() ? '<C-n>' : '<TAB>'", {noremap = true, silent = true, expr = true})
+map("i", "<S-TAB>", "pumvisible() ? '<C-p>' : '<C-h>'", {noremap = true, expr = true})
+map("i", "<C-Space>", "coc#refresh()", { silent = true, expr = true })
+map("i", "<CR>", "pumvisible() ? coc#_select_confirm() : '<C-G>u<CR><C-R>=coc#on_enter()<CR>'", {silent = true, expr = true, noremap = true})
 
 -- set colorscheme
-vim.cmd([[colorscheme codedark]])
+vim.cmd([[colorscheme catppuccin]])
 
 -- plugin time
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use {'neoclide/coc.nvim', branch = 'release'}
-  use 'tomasiser/vim-code-dark'
+  use {
+    'catppuccin/nvim',
+    as = 'catpuccin',
+    config = function()
+      require("catppuccin").setup {}
+    end
+  }
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = function ()
       require('lualine').setup {
         options = {
-          theme = 'codedark',
+          theme = 'catppuccin',
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
         },
@@ -70,18 +76,19 @@ return require('packer').startup(function()
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     tag = "*",
     config = function ()
-      options = {
-        offsets = {{ filetype = "NvimTree", text = "File Explorer", padding = 0 }},
+      require("bufferline").setup {
+        options = {{ filetype = "NvimTree", text = "File Explorer", padding = 0 }},
       }
     end
   }
   use {
     'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
     config = function ()
       require'nvim-treesitter.configs'.setup {
         highlight = {
           enable = true
-        },
+  	}
       }
     end
   }
@@ -121,4 +128,5 @@ return require('packer').startup(function()
       require'alpha'.setup(require'alpha.themes.startify'.config)
     end
   }
+  use 'andweeb/presence.nvim'
 end)

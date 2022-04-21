@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+typeset -A menu
+
+safe_location="$(xdg-user-dir PICTURES)/Screenshots"
+file_name="$(date +%Y-%m-%d-%H:%M:%S).png"
+
+if [[ ! -f $safe_location ]]; then
+  mkdir -p $safe_location
+fi
+
+menu=(
+  [ Screen]="maim $safe_location/$file_name"
+  [ Area]="maim -s $safe_location/$file_name"
+  [ Window]="maim -i $(xdotool getactivewindow) $safe_location/$file_name"
+)
+
+selection="$(printf '%s\n' "${!menu[@]}" | rofi -theme-str '#listview { lines: 3; }' -dmenu -p 'Take a Screenshot')"
+
+exec ${menu[${selection}]}

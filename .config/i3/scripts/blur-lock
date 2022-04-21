@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# A blur locking tool
+# based on endeavouros' i3wm setup's
+# deps: i3
+
+PICTURE=/tmp/i3lock.png
+SCREENSHOT="maim $PICTURE"
+FONT="Caskaydia-Cove-Nerd-Font-Complete"
+
+BLUR="5x4"
+
+$SCREENSHOT
+convert -blur $BLUR -font $FONT -fill white -pointsize 60 -gravity center -draw "text 0,300 ''" $PICTURE $PICTURE
+# convert $PICTURE -blur $BLUR $PICTURE
+i3lock -i $PICTURE
+rm $PICTURE
