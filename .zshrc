@@ -220,7 +220,6 @@ plug=(
   hlissner/zsh-autopair
   hcgraf/zsh-sudo
   zsh-users/zsh-completions
-  # z-shell/zsh-diff-so-fancy
   zdharma-continuum/fast-syntax-highlighting
   zsh-users/zsh-history-substring-search
   zsh-users/zsh-autosuggestions
