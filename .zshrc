@@ -228,20 +228,21 @@ plug=(
 plug-load ${plug}
 
 # path
-# path+=('$HOME/.local/bin')
+path+=('/home/enz/.local/bin')
 # path+=('${HOME}/.spicetify')
-# export PATH
-export "PATH=$HOME/.spicetify:$PATH"
+export PATH
+# export "PATH=$HOME/.spicetify:$PATH"
 
 # asdf
-. $HOME/.asdf/asdf.sh
-fpath=(${ASDF_DIR}/completions $fpath)
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+# . $HOME/.asdf/asdf.sh
+. /opt/asdf-vm/asdf.sh
+[[ -d ${ASDF_DIR} ]] && fpath=(${ASDF_DIR}/completions $fpath)
+# source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
 # p10k config
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # vim:et sts=2 sw=2 ft=zsh
