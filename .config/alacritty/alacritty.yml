@@ -14,16 +14,16 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
+  TERM: xterm-256color
 
-# window:
+window:
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. The number of columns
@@ -84,7 +84,7 @@
   #title: Alacritty
 
   # Allow terminal applications to change Alacritty's window title.
-  #dynamic_title: true
+  dynamic_title: true
 
   # Window class (Linux/BSD only):
   #class:
@@ -117,7 +117,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: JetBrainsMono Nerd Font
+    family: JetBrainsMono Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
@@ -156,7 +156,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  #size: 11.0
+  size: 12.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -186,45 +186,196 @@ font:
   #builtin_box_drawing: true
 
 # If `true`, bold text is drawn using the bright color variants.
-#draw_bold_text_with_bright_colors: false
+draw_bold_text_with_bright_colors: false
 
-# Catppuccin!
+# Colors (Ayu Dark)
 colors:
   # Default colors
   primary:
-    background: '0x1E1D2F'
-    foreground: '0xD9E0EE'
-
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x1E1D2F'
-    cursor: '0xF5E0DC'
+    background: '0x0A0E14'
+    foreground: '0xB3B1AD'
 
   # Normal colors
   normal:
-    black:   '0x6E6C7E'
-    red:     '0xF28FAD'
-    green:   '0xABE9B3'
-    yellow:  '0xFAE3B0'
-    blue:    '0x96CDFB'
-    magenta: '0xF5C2E7'
-    cyan:    '0x89DCEB'
-    white:   '0xD9E0EE'
+    black:   '0x01060E'
+    red:     '0xEA6C73'
+    green:   '0x91B362'
+    yellow:  '0xF9AF4F'
+    blue:    '0x53BDFA'
+    magenta: '0xFAE994'
+    cyan:    '0x90E1C6'
+    white:   '0xC7C7C7'
 
   # Bright colors
   bright:
-    black:   '0x988BA2'
-    red:     '0xF28FAD'
-    green:   '0xABE9B3'
-    yellow:  '0xFAE3B0'
-    blue:    '0x96CDFB'
-    magenta: '0xF5C2E7'
-    cyan:    '0x89DCEB'
-    white:   '0xD9E0EE'
+    black:   '0x686868'
+    red:     '0xF07178'
+    green:   '0xC2D94C'
+    yellow:  '0xFFB454'
+    blue:    '0x59C2FF'
+    magenta: '0xFFEE99'
+    cyan:    '0x95E6CB'
+    white:   '0xFFFFFF'
 
-  indexed_colors:
-    - { index: 16, color: '0xF8BD96' }
-    - { index: 17, color: '0xF5E0DC' }
+# Catppuccin!
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x1E1D2F'
+#     foreground: '0xD9E0EE'
+
+#   # Colors the cursor will use if `custom_cursor_colors` is true
+#   cursor:
+#     text: '0x1E1D2F'
+#     cursor: '0xF5E0DC'
+
+#   # Normal colors
+#   normal:
+#     black:   '0x6E6C7E'
+#     red:     '0xF28FAD'
+#     green:   '0xABE9B3'
+#     yellow:  '0xFAE3B0'
+#     blue:    '0x96CDFB'
+#     magenta: '0xF5C2E7'
+#     cyan:    '0x89DCEB'
+#     white:   '0xD9E0EE'
+
+#   # Bright colors
+#   bright:
+#     black:   '0x988BA2'
+#     red:     '0xF28FAD'
+#     green:   '0xABE9B3'
+#     yellow:  '0xFAE3B0'
+#     blue:    '0x96CDFB'
+#     magenta: '0xF5C2E7'
+#     cyan:    '0x89DCEB'
+#     white:   '0xD9E0EE'
+
+#   indexed_colors:
+#     - { index: 16, color: '0xF8BD96' }
+#     - { index: 17, color: '0xF5E0DC' }
+
+# Colors (Gruvbox dark)
+# colors:
+#   # Default colors
+#   primary:
+#     # hard contrast: background = '0x1d2021'
+#     background: '0x282828'
+#     # soft contrast: background = '0x32302f'
+#     foreground: '0xebdbb2'
+
+#   # Normal colors
+#   normal:
+#     black:   '0x282828'
+#     red:     '0xcc241d'
+#     green:   '0x98971a'
+#     yellow:  '0xd79921'
+#     blue:    '0x458588'
+#     magenta: '0xb16286'
+#     cyan:    '0x689d6a'
+#     white:   '0xa89984'
+
+#   # Bright colors
+#   bright:
+#     black:   '0x928374'
+#     red:     '0xfb4934'
+#     green:   '0xb8bb26'
+#     yellow:  '0xfabd2f'
+#     blue:    '0x83a598'
+#     magenta: '0xd3869b'
+#     cyan:    '0x8ec07c'
+#     white:   '0xebdbb2'
+
+# Colors (Material Theme)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x1e282d'
+#     foreground: '0xc4c7d1'
+
+#   # Normal colors
+#   normal:
+#     black:   '0x666666'
+#     red:     '0xeb606b'
+#     green:   '0xc3e88d'
+#     yellow:  '0xf7eb95'
+#     blue:    '0x80cbc4'
+#     magenta: '0xff2f90'
+#     cyan:    '0xaeddff'
+#     white:   '0xffffff'
+
+#   # Bright colors
+#   bright:
+#     black:   '0xa1a1a1'
+#     red:     '0xeb606b'
+#     green:   '0xc3e88d'
+#     yellow:  '0xf7eb95'
+#     blue:    '0x7dc6bf'
+#     magenta: '0x6c71c4'
+#     cyan:    '0x35434d'
+#     white:   '0xffffff'
+
+# schemes:
+#   codelight: &light
+#     primary:
+#       background: '#ffffff'
+#       foreground: '#1e1e1e'
+
+#     cursor:
+#       text: '#d4d4d4'
+#       cursor: '#d4d4d4'
+
+#     normal:
+#       black:   '#1e1e1e'
+#       red:     '#c72e0f'
+#       green:   '#009000'
+#       yellow:  '#795e25'
+#       blue:    '#007acc'
+#       magenta: '#af00db'
+#       cyan:    '#56b6c2'
+#       white:   '#d4d4d4'
+
+#     bright:
+#       black:   '#1e1e1e'
+#       red:     '#c72e0f'
+#       green:   '#009000'
+#       yellow:  '#795e25'
+#       blue:    '#007acc'
+#       magenta: '#af00db'
+#       cyan:    '#56b6c2'
+#       white:   '#d4d4d4'
+
+#   codedark: &dark
+
+#     primary:
+#       background: '#1e1e1e'
+#       foreground: '#d4d4d4'
+
+#     cursor:
+#       text: '#d4d4d4'
+#       cursor: '#d4d4d4'
+
+#     normal:
+#       black:   '#1e1e1e'
+#       red:     '#f44747'
+#       green:   '#608b4e'
+#       yellow:  '#dcdcaa'
+#       blue:    '#569cd6'
+#       magenta: '#c678dd'
+#       cyan:    '#56b6c2'
+#       white:   '#d4d4d4'
+
+#     bright:
+#       black:   '#545454'
+#       red:     '#f44747'
+#       green:   '#608b4e'
+#       yellow:  '#dcdcaa'
+#       blue:    '#569cd6'
+#       magenta: '#c678dd'
+#       cyan:    '#56b6c2'
+#       white:   '#d4d4d4'
+
+# colors: *dark
 
 # Colors (Tomorrow Night)
 #colors:
@@ -488,7 +639,7 @@ cursor:
 # Offer IPC using `alacritty msg` (unix only)
 #ipc_socket: true
 
-#mouse:
+mouse:
   # Click settings
   #
   # The `double_click` and `triple_click` settings control the time
@@ -498,7 +649,7 @@ cursor:
   #triple_click: { threshold: 300 }
 
   # If this is `true`, the cursor is temporarily hidden when typing.
-  #hide_when_typing: false
+  hide_when_typing: true
 
 # Regex hints
 #

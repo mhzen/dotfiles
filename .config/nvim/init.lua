@@ -30,10 +30,6 @@ opt.termguicolors = true
 -- set keybinds
 vim.g.mapleader = " "
 local map = vim.api.nvim_set_keymap
-map("n", "<leader>.", "<Plug>(coc-codeaction)", {silent = true, noremap = true})
-map("n", "gd", "<Plug>(coc-definition)", {silent = true, noremap = true})
-map("n", "<C-K>", ":call CocActionAsync('doHover')<CR>", {silent = true, noremap = true})
-map("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true, noremap = true})
 map("n", "<leader>ff", ":Telescope find_files<CR>", {silent = true, noremap = true})
 map("n", "m<Down>", ":m .+1<CR>", {silent = true, noremap = true})
 map("n", "m<Up>", ":m .-2<CR>", {silent = true, noremap = true})
@@ -44,23 +40,81 @@ map("n", "<leader><Left>", ":BufferLineCyclePrev<CR>", {silent = true, noremap =
 map("n", "<leader>x", ":bd<CR>", {silent = true, noremap = true})
 map("n", "<leader>e", ":NvimTreeFocus<CR>", {silent = true, noremap = true})
 map("n", "<leader>q", ":NvimTreeClose<CR>", {silent = true, noremap = true})
-map("i", "<TAB>", "pumvisible() ? '<C-n>' : '<TAB>'", {noremap = true, silent = true, expr = true})
-map("i", "<S-TAB>", "pumvisible() ? '<C-p>' : '<C-h>'", {noremap = true, expr = true})
-map("i", "<C-Space>", "coc#refresh()", { silent = true, expr = true })
-map("i", "<CR>", "pumvisible() ? coc#_select_confirm() : '<C-G>u<CR><C-R>=coc#on_enter()<CR>'", {silent = true, expr = true, noremap = true})
 
--- set colorscheme
-vim.cmd([[colorscheme catppuccin]])
-
--- plugin time
-return require('packer').startup(function()
+local use = require('packer').use
+require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use {'neoclide/coc.nvim', branch = 'release'}
   use {
-    'catppuccin/nvim',
-    as = 'catppuccin',
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'neovim/nvim-lspconfig',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip'
+    },
     config = function()
-      require("catppuccin").setup {}
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+      local lspconfig = require('lspconfig')
+      -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+      local servers = { 'pyright', 'sumneko_lua' }
+      for _, lsp in ipairs(servers) do
+        lspconfig[lsp].setup {
+          -- on_attach = my_custom_on_attach,
+          capabilities = capabilities,
+        }
+      end
+      -- luasnip setup
+      local luasnip = require 'luasnip'
+      -- nvim-cmp setup
+      local cmp = require 'cmp'
+      cmp.setup {
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          },
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+        }),
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+        },
+      }
+    end
+  }
+  use {
+    'Shatur/neovim-ayu',
+    config = function()
+      vim.cmd([[colorscheme ayu-dark]])
     end
   }
   use {
@@ -69,12 +123,18 @@ return require('packer').startup(function()
     config = function ()
       require('lualine').setup {
         options = {
-          theme = 'catppuccin',
+          theme = 'ayu_dark',
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
         },
         extensions = { 'nvim-tree' }
       }
+    end
+  }
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
     end
   }
   use {
@@ -94,11 +154,18 @@ return require('packer').startup(function()
       require'nvim-treesitter.configs'.setup {
         highlight = {
           enable = true
-  	}
+  	    }
       }
     end
   }
-  use 'tpope/vim-commentary'
+  use {
+    'b3nj5m1n/kommentary',
+    config = function ()
+      require('kommentary.config').configure_language("default", {
+        prefer_single_line_comments = true,
+      })
+    end
+  }
   use {
     'windwp/nvim-autopairs',
     config = function ()
@@ -131,8 +198,49 @@ return require('packer').startup(function()
   use {
     'goolord/alpha-nvim',
     config = function ()
-      require'alpha'.setup(require'alpha.themes.startify'.config)
+      local alpha = require("alpha")
+      local dashboard = require("alpha.themes.dashboard")
+
+      -- Set header
+      dashboard.section.header.val = {
+          " ⡆⣐⢕⢕⢕⢕⢕⢕⢕⢕⠅⢗⢕⢕⢕⢕⢕⢕⢕⠕⠕⢕⢕⢕⢕⢕⢕⢕⢕⢕ ",
+          " ⢐⢕⢕⢕⢕⢕⣕⢕⢕⠕⠁⢕⢕⢕⢕⢕⢕⢕⢕⠅⡄⢕⢕⢕⢕⢕⢕⢕⢕⢕ ",
+          " ⢕⢕⢕⢕⢕⠅⢗⢕⠕⣠⠄⣗⢕⢕⠕⢕⢕⢕⠕⢠⣿⠐⢕⢕⢕⠑⢕⢕⠵⢕ ",
+          " ⢕⢕⢕⢕⠁⢜⠕⢁⣴⣿⡇⢓⢕⢵⢐⢕⢕⠕⢁⣾⢿⣧⠑⢕⢕⠄⢑⢕⠅⢕ ",
+          " ⢕⢕⠵⢁⠔⢁⣤⣤⣶⣶⣶⡐⣕⢽⠐⢕⠕⣡⣾⣶⣶⣶⣤⡁⢓⢕⠄⢑⢅⢑ ",
+          " ⠍⣧⠄⣶⣾⣿⣿⣿⣿⣿⣿⣷⣔⢕⢄⢡⣾⣿⣿⣿⣿⣿⣿⣿⣦⡑⢕⢤⠱⢐ ",
+          " ⢠⢕⠅⣾⣿⠋⢿⣿⣿⣿⠉⣿⣿⣷⣦⣶⣽⣿⣿⠈⣿⣿⣿⣿⠏⢹⣷⣷⡅⢐ ",
+          " ⣔⢕⢥⢻⣿⡀⠈⠛⠛⠁⢠⣿⣿⣿⣿⣿⣿⣿⣿⡀⠈⠛⠛⠁⠄⣼⣿⣿⡇⢔ ",
+          " ⢕⢕⢽⢸⢟⢟⢖⢖⢤⣶⡟⢻⣿⡿⠻⣿⣿⡟⢀⣿⣦⢤⢤⢔⢞⢿⢿⣿⠁⢕ ",
+          " ⢕⢕⠅⣐⢕⢕⢕⢕⢕⣿⣿⡄⠛⢀⣦⠈⠛⢁⣼⣿⢗⢕⢕⢕⢕⢕⢕⡏⣘⢕ ",
+          " ⢕⢕⠅⢓⣕⣕⣕⣕⣵⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣷⣕⢕⢕⢕⢕⡵⢀⢕⢕ ",
+          " ⢑⢕⠃⡈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢃⢕⢕⢕ ",
+          " ⣆⢕⠄⢱⣄⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⢁⢕⢕⠕⢁ ",
+          " ⣿⣦⡀⣿⣿⣷⣶⣬⣍⣛⣛⣛⡛⠿⠿⠿⠛⠛⢛⣛⣉⣭⣤⣂⢜⠕⢑⣡⣴⣿ ",
+      }
+
+      -- Set menu
+      dashboard.section.buttons.val = {
+          dashboard.button( "e", "  new" , ":enew <BAR> startinsert <CR>"),
+          dashboard.button( "f", "  find", ":cd $HOME/dev | Telescope find_files<CR>"),
+          dashboard.button( "r", "  recent"   , ":Telescope oldfiles<CR>"),
+          -- dashboard.button( "s", "  init.lua" , ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>"),
+          dashboard.button( "s", "  init.lua" , ":e $MYVIMRC<CR>"),
+          dashboard.button( "u", "  update" , ":PackerSync<CR>"),
+          dashboard.button( "q", "  quit", ":qa<CR>"),
+      }
+
+      -- Send config to alpha
+      alpha.setup(dashboard.opts)
+
+      -- Disable folding on alpha buffer
+      vim.cmd([[
+          autocmd FileType alpha setlocal nofoldenable
+      ]])
     end
   }
-  use 'andweeb/presence.nvim'
+  use {"ellisonleao/glow.nvim", branch = 'main'}
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
