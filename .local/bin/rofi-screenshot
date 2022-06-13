@@ -8,12 +8,12 @@ if [[ ! -f $safe_location ]]; then
   mkdir -p $safe_location
 fi
 
-screen=" Fullscreen"
-area="麗 Area"
-window="类 Active Window"
+screen="full"
+area="area"
+window="window"
 
 chosen=$(printf '%s\n%s\n%s' "$screen" "$area" "$window" | \
-  rofi -theme-str '#listview {lines: 3;} #window {height: 20%; width: 20%;}' -dmenu -p " Screenshot")
+  rofi -theme-str '#listview {lines: 3;} #window {height: 20%; width: 20%;}' -dmenu -p "screenshot")
 
 function clipboard() {
   if [ $copy_to_clipboard = true ]; then

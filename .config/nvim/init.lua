@@ -1,10 +1,11 @@
+-- bootstrap packer
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
--- set options
+-- options
 local opt = vim.opt
 opt.tabstop = 2
 opt.shiftwidth = 0
@@ -27,12 +28,12 @@ opt.relativenumber = true
 opt.winblend = 10
 opt.termguicolors = true
 
--- set keybinds
+-- keybinds
 vim.g.mapleader = " "
 local map = vim.api.nvim_set_keymap
 map("n", "<leader>ff", ":Telescope find_files<CR>", {silent = true, noremap = true})
-map("n", "m<Down>", ":m .+1<CR>", {silent = true, noremap = true})
-map("n", "m<Up>", ":m .-2<CR>", {silent = true, noremap = true})
+map("n", "<leader><Down>", ":m .+1<CR>", {silent = true, noremap = true})
+map("n", "<leader><Up>", ":m .-2<CR>", {silent = true, noremap = true})
 map("n", "<leader><esc>", ":noh<CR>", {silent = true, noremap = true})
 map("n", "<leader>w", ":w<CR>", {silent = true, noremap = true})
 map("n", "<leader><Right>", ":BufferLineCycleNext<CR>", {silent = true, noremap = true})
@@ -41,6 +42,7 @@ map("n", "<leader>x", ":bd<CR>", {silent = true, noremap = true})
 map("n", "<leader>e", ":NvimTreeFocus<CR>", {silent = true, noremap = true})
 map("n", "<leader>q", ":NvimTreeClose<CR>", {silent = true, noremap = true})
 
+-- plugins and plugins' options
 local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
@@ -52,6 +54,7 @@ require('packer').startup(function()
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-calc',
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip'
     },
@@ -107,14 +110,37 @@ require('packer').startup(function()
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          { name = 'path' },
+          { name = 'calc' },
         },
       }
+
+      -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
+        }
+      })
+
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          { name = 'cmdline' }
+        })
+      })
     end
   }
   use {
-    'Shatur/neovim-ayu',
+    'navarasu/onedark.nvim',
     config = function()
-      vim.cmd([[colorscheme ayu-dark]])
+      require('onedark').setup {
+          style = 'darker'
+      }
+      require('onedark').load()
     end
   }
   use {
@@ -123,7 +149,7 @@ require('packer').startup(function()
     config = function ()
       require('lualine').setup {
         options = {
-          theme = 'ayu_dark',
+          theme = 'onedark',
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
         },
@@ -143,7 +169,7 @@ require('packer').startup(function()
     tag = "*",
     config = function ()
       require("bufferline").setup {
-        options = {{ filetype = "NvimTree", text = "File Explorer", padding = 0 }},
+        options = { offsets = {{filetype = "NvimTree", text = "File Explorer", padding = 1}} },
       }
     end
   }
@@ -193,7 +219,13 @@ require('packer').startup(function()
   }
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {'nvim-lua/plenary.nvim'}
+    requires = {
+      'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+    },
+    config = function ()
+      require('telescope').load_extension('fzf')
+    end
   }
   use {
     'goolord/alpha-nvim',
@@ -222,10 +254,8 @@ require('packer').startup(function()
       -- Set menu
       dashboard.section.buttons.val = {
           dashboard.button( "e", "  new" , ":enew <BAR> startinsert <CR>"),
-          dashboard.button( "f", "  find", ":cd $HOME/dev | Telescope find_files<CR>"),
           dashboard.button( "r", "  recent"   , ":Telescope oldfiles<CR>"),
-          -- dashboard.button( "s", "  init.lua" , ":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>"),
-          dashboard.button( "s", "  init.lua" , ":e $MYVIMRC<CR>"),
+          dashboard.button( "i", "  init.lua" , ":e $MYVIMRC<CR>"),
           dashboard.button( "u", "  update" , ":PackerSync<CR>"),
           dashboard.button( "q", "  quit", ":qa<CR>"),
       }
@@ -239,7 +269,6 @@ require('packer').startup(function()
       ]])
     end
   }
-  use {"ellisonleao/glow.nvim", branch = 'main'}
   if packer_bootstrap then
     require('packer').sync()
   end

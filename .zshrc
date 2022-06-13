@@ -6,14 +6,11 @@ fi
 bindkey -e
 setopt HIST_IGNORE_ALL_DUPS
 zstyle ':zim:zmodule' use 'degit'
-setopt CORRECT
-SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
-zstyle ':zim:git' aliases-prefix 'g'
+zstyle ':zim:termtitle' hooks 'preexec' 'precmd'
+zstyle ':zim:termtitle:preexec' format '${${(A)=1}[1]}'
+zstyle ':zim:termtitle:precmd'  format '%3~'
 
-export EDITOR="nvim"
-export TERMINAL="alacritty"
-
-ZIM_HOME=~/.config/zim
+ZIM_HOME=~/.config/zsh
 
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
   curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
@@ -25,7 +22,38 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
 fi
 
 source ${ZIM_HOME}/init.zsh
-source ${ZIM_HOME}/alias.zsh
+
+# alias
+alias :q='exit'
+alias open='xdg-open'
+alias rrr='exec zsh'
+(( $+commands[trash-put] )) && alias rm='trash-put'
+
+# fuzzy find history forward & backward
+if [[ -n "${terminfo[kcuu1]}" ]]; then
+  autoload -U up-line-or-beginning-search
+  zle -N up-line-or-beginning-search
+
+  bindkey -M emacs "${terminfo[kcuu1]}" up-line-or-beginning-search
+  bindkey -M viins "${terminfo[kcuu1]}" up-line-or-beginning-search
+  bindkey -M vicmd "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+if [[ -n "${terminfo[kcud1]}" ]]; then
+  autoload -U down-line-or-beginning-search
+  zle -N down-line-or-beginning-search
+
+  bindkey -M emacs "${terminfo[kcud1]}" down-line-or-beginning-search
+  bindkey -M viins "${terminfo[kcud1]}" down-line-or-beginning-search
+  bindkey -M vicmd "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
+
+[[ -d /usr/share/fzf/ ]] && \
+. /usr/share/fzf/completion.zsh && \
+. /usr/share/fzf/key-bindings.zsh
+
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export GPG_TTY=$(tty)
 
 path+=(~/.local/bin)
 export PATH

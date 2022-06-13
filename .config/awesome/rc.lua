@@ -17,12 +17,11 @@ editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 require("config.notifs")
--- require("config.menu")
+require("config.menu")
 require("config.keys")
 require("config.rules")
 require("config.layouts")
 require("config.bar")
--- awful.spawn.with_shell(gfs.get_configuration_dir() .. "/config/autostart.sh")
 
 -- Autostarts
 do

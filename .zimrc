@@ -1,14 +1,15 @@
-zmodule romkatv/powerlevel10k --use degit
+zmodule romkatv/powerlevel10k
 
-zmodule zimfw/environment --use degit
-zmodule zimfw/input --use degit
-zmodule zimfw/git --use degit
+zmodule environment
+zmodule input
+zmodule termtitle
+zmodule utility
 
-zmodule skywind3000/z.lua --cmd 'eval "$(lua {}/z.lua --init zsh enhanced once)"' --use degit
-zmodule jocelynmallon/zshmarks --use degit
+zmodule skywind3000/z.lua
+zmodule peterhurford/up.zsh -s up.plugin.zsh
+zmodule trapd00r/LS_COLORS -s lscolors.sh
 
-zmodule zsh-users/zsh-completions --fpath src --use degit
-zmodule completion --use degit
-zmodule zdharma-continuum/fast-syntax-highlighting --use degit
-zmodule zsh-users/zsh-history-substring-search --use degit
-zmodule zsh-users/zsh-autosuggestions --use degit
+zmodule zsh-users/zsh-completions -f src
+zmodule completion
+zmodule zdharma-continuum/fast-syntax-highlighting
+zmodule zsh-users/zsh-autosuggestions
