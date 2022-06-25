@@ -4,7 +4,7 @@
 set $mod Mod4
 
 # set font
-font pango:CaskaydiaCove Nerd Font 11
+font pango:CaskaydiaCove Nerd Font 12
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -81,16 +81,15 @@ bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:   Net "
-set $ws2 "2:   Term "
-set $ws3 "3:   File "
-set $ws4 "4:   Comm "
-set $ws5 "5:   Media "
-set $ws6 "6:   Launch "
-set $ws7 "7:   Games "
-set $ws8 "8:   8 "
-set $ws9 "9:   9 "
-set $ws10 "10:   10 "
+set $ws1 "1:  home "
+set $ws2 "2: dot "
+set $ws3 "3:  files "
+set $ws4 "4:   "
+set $ws5 "5:   "
+set $ws6 "6:   "
+set $ws7 "7:   "
+set $ws8 "8: ﭮ  "
+set $ws9 "9: 煉 "
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -102,7 +101,7 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+# bindsym $mod+0 workspace number $ws10
 set_from_resource $i3-wm.binding.ws_next2 i3-wm.binding.ws_next2 Mod1+Right
 bindsym $mod+$i3-wm.binding.ws_next2 workspace next
 set_from_resource $i3-wm.binding.ws_prev2 i3-wm.binding.ws_prev2 Mod1+Left
@@ -118,7 +117,7 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+# bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # workspace assignment
 # browser(s) goes to workspace 1
@@ -139,7 +138,7 @@ assign [class="mpv"] $ws5
 assign [class="PolyMC"] $ws6
 assign [class="osu!.exe"] $ws7
 assign [class="Minecraft"] $ws7
-assign [class="qBittorrent"] $ws10
+# assign [class="qBittorrent"] $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -178,9 +177,10 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-  status_command i3blocks -c ~/.config/i3/i3block.conf
+  # status_command i3blocks -c ~/.config/i3/i3block.conf
   # status_command i3blocks -c "~/.config/i3/i3block.conf"
   # status_command i3blocks
+  status_command i3status-rs ~/.config/i3status-rust/config.toml
   position top
   colors {
     background #1A1826
@@ -219,3 +219,4 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nitrogen --restore
+exec --no-startup-id rofication-daemon.py

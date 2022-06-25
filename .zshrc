@@ -3,61 +3,73 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-bindkey -e
-setopt HIST_IGNORE_ALL_DUPS
-zstyle ':zim:zmodule' use 'degit'
-zstyle ':zim:termtitle' hooks 'preexec' 'precmd'
-zstyle ':zim:termtitle:preexec' format '${${(A)=1}[1]}'
-zstyle ':zim:termtitle:precmd'  format '%3~'
-
-ZIM_HOME=~/.config/zsh
-
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-      https://raw.githubusercontent.com/zimfw/zimfw/master/zimfw.zsh
-fi
-
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  source ${ZIM_HOME}/zimfw.zsh init -q
-fi
-
-source ${ZIM_HOME}/init.zsh
-
-# alias
-alias :q='exit'
-alias open='xdg-open'
-alias rrr='exec zsh'
-(( $+commands[trash-put] )) && alias rm='trash-put'
-
-# fuzzy find history forward & backward
-if [[ -n "${terminfo[kcuu1]}" ]]; then
-  autoload -U up-line-or-beginning-search
-  zle -N up-line-or-beginning-search
-
-  bindkey -M emacs "${terminfo[kcuu1]}" up-line-or-beginning-search
-  bindkey -M viins "${terminfo[kcuu1]}" up-line-or-beginning-search
-  bindkey -M vicmd "${terminfo[kcuu1]}" up-line-or-beginning-search
-fi
-if [[ -n "${terminfo[kcud1]}" ]]; then
-  autoload -U down-line-or-beginning-search
-  zle -N down-line-or-beginning-search
-
-  bindkey -M emacs "${terminfo[kcud1]}" down-line-or-beginning-search
-  bindkey -M viins "${terminfo[kcud1]}" down-line-or-beginning-search
-  bindkey -M vicmd "${terminfo[kcud1]}" down-line-or-beginning-search
-fi
-
-[[ -d /usr/share/fzf/ ]] && \
-. /usr/share/fzf/completion.zsh && \
-. /usr/share/fzf/key-bindings.zsh
-
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export GPG_TTY=$(tty)
-
 path+=(~/.local/bin)
 export PATH
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
+export NNN_PLUG='f:finder;p:mocplay;d:diffs;t:nmount;v:imgview'
+
+bindkey -e
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_VERIFY
+setopt SHARE_HISTORY
+setopt INTERACTIVE_COMMENTS
+setopt NO_CLOBBER
+setopt NO_CASE_GLOB
+setopt NO_LIST_BEEP
+setopt EXTENDED_GLOB
+if (( ! ${+HISTFILE} )) typeset -g HISTFILE=${ZDOTDIR:-${HOME}}/.zhistory
+HISTSIZE=20000
+SAVEHIST=10000
+
+# alias
+alias :q='exit'
+alias open='xdg-open'
+if (( $+commands[exa] )); then
+  alias ls='exa --group-directories-first'
+else
+  alias ls='ls --group-directories-first --color=auto'
+fi
+alias l='ls -lh --git'
+alias ll='l -a'
+(( $+commands[trash-put] )) && alias rm='trash-put'
+
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [[ ! -d $ZINIT_HOME ]]; then
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+source "${ZINIT_HOME}/zinit.zsh"
+
+
+zinit lucid light-mode nocd for \
+    romkatv/powerlevel10k \
+    OMZL::termsupport.zsh
+
+zinit wait lucid light-mode for \
+    OMZL::{completion,key-bindings}.zsh \
+    OMZP::{sudo,fzf} \
+  atclone"lua z.lua --init zsh enhanced once > z.zsh" \
+  atpull"%atclone" pick"z.zsh" nocompile"!" \
+  atload"alias zz='z -I'; alias zb='z -b'; alias zc='z -c'; alias zzc='zz -c'" \
+    skywind3000/z.lua \
+  atclone"dircolors -b LS_COLORS > clrs.zsh" \
+  atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+  atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”' \
+    trapd00r/LS_COLORS \
+  atinit"zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+  blockf atpull'zinit creinstall -q .' \
+    zsh-users/zsh-completions
+
+[[ -f /usr/share/nnn/quitcd/quitcd.bash_zsh ]] && \
+. /usr/share/nnn/quitcd/quitcd.bash_zsh
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -10,13 +10,12 @@ local themes_path = string.format("%s/.config/awesome/themes/", os.getenv("HOME"
 
 local theme = {}
 
-theme.font          = "Roboto Bold 10"
+theme.font          = "Iosevka Nerd Font Bold 11"
 theme.icon          = "Font Awesome 6 Free Regular 10"
 
-theme.bg_normal     = "#000000"
--- theme.bg_focus      = "#131721"
-theme.bg_focus      = theme.bg_normal
-theme.bg_urgent     = theme.bg_normal
+theme.bg_normal     = "#16161D"
+theme.bg_focus      = "#1F1F28"
+theme.bg_urgent     = "#E82424"
 theme.bg_minimize   = theme.bg_normal
 theme.bg_systray    = theme.bg_normal
 
@@ -33,10 +32,7 @@ theme.border_focus  = theme.fg_normal
 theme.border_marked = theme.fg_urgent
 
 theme.taglist_spacing = dpi(4)
-theme.taglist_bg_focus = theme.bg_focus
-theme.taglist_fg_focus = theme.fg_focus
-theme.taglist_fg_empty = theme.fg_normal
-theme.taglist_bg_empty = theme.bg_normal
+theme.taglist_fg_occupied = theme.fg_focus
 theme.taglist_fg_urgent	= theme.fg_urgent
 
 -- There are other variable sets

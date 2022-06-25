@@ -27,6 +27,7 @@ opt.signcolumn = "number"
 opt.relativenumber = true
 opt.winblend = 10
 opt.termguicolors = true
+opt.title = true
 
 -- keybinds
 vim.g.mapleader = " "
@@ -135,12 +136,12 @@ require('packer').startup(function()
     end
   }
   use {
-    'navarasu/onedark.nvim',
+    'rebelot/kanagawa.nvim',
     config = function()
-      require('onedark').setup {
-          style = 'darker'
-      }
-      require('onedark').load()
+      require('kanagawa').setup({
+        dimInactive = true,
+      })
+      vim.cmd("colorscheme kanagawa")
     end
   }
   use {
@@ -149,7 +150,7 @@ require('packer').startup(function()
     config = function ()
       require('lualine').setup {
         options = {
-          theme = 'onedark',
+          theme = 'kanagawa',
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
         },
@@ -214,6 +215,15 @@ require('packer').startup(function()
     config = function ()
       require'nvim-tree'.setup {
         hijack_cursor = true,
+        view = {
+          adaptive_size = true,
+          mappings = {
+            list = {
+              { key = "[", action = "dir_up" },
+              { key = "]", action = "cd" },
+            }
+          }
+        }
       }
     end
   }

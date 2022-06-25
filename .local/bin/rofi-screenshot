@@ -11,8 +11,9 @@ fi
 screen="full"
 area="area"
 window="window"
+options="$screen\n$area\n$window"
 
-chosen=$(printf '%s\n%s\n%s' "$screen" "$area" "$window" | \
+chosen=$(printf '%s\n%s\n%s\n%s\n%s' "$screen" "$area" "$window" "$imgur" "$test" | \
   rofi -theme-str '#listview {lines: 3;} #window {height: 20%; width: 20%;}' -dmenu -p "screenshot")
 
 function clipboard() {
@@ -33,5 +34,4 @@ case "$chosen" in
     "$window") 
       maim -i $(xdotool getactivewindow) $safe_location/$file_name
       clipboard
-      ;;
 esac

@@ -7,7 +7,7 @@ local awful         = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local lain          = require("lain")
 local beautiful     = require("beautiful")
--- local apps          = require("configuration.apps")
+local bling          = require("bling")
 require("config.menu")
 
 -- vars/misc
@@ -268,8 +268,27 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, shift }, "r", function () awful.spawn(string.format("rofi -show run")) end,
 		{description = "rofi launcher", group = "launcher"}),
 
+    awful.key({ modkey }, ".", function () awful.spawn("rofimoji") end,
+		{description = "rofi launcher", group = "launcher"}),
+
+  -- Screenshot :
+    awful.key({ }, "Print", function ()
+      awful.spawn.easy_async_with_shell("scrot '%Y-%m-%d-%H:%M:%S.png' -d 1 -e 'xclip -selection clipboard -t image/png -i $f; mv $f $$(xdg-user-dir PICTURES)/Screenshots' && notify-send -u low 'Scrot' 'Screenshot taken'")
+    end, {description = "take fullscreen screenshot", group = "screenshot"}),
+    awful.key({ ctrl }, "Print", function ()
+      awful.spawn.easy_async_with_shell("scrot -u '%Y-%m-%d-%H:%M:%S.png' -d 1 -e 'xclip -selection clipboard -t image/png -i $f; mv $f $$(xdg-user-dir PICTURES)/Screenshots' && notify-send -u low 'Scrot' 'Screenshot taken'")
+    end, {description = "take fullscreen screenshot", group = "screenshot"}),
+    awful.key({ shift }, "Print", function ()
+      awful.spawn.easy_async_with_shell("scrot -s '%Y-%m-%d-%H:%M:%S.png' -d 1 -e 'xclip -selection clipboard -t image/png -i $f; mv $f $$(xdg-user-dir PICTURES)/Screenshots' && notify-send -u low 'Scrot' 'Screenshot taken'")
+    end, {description = "take fullscreen screenshot", group = "screenshot"}),
+
 	-- Center Window :
-	awful.key({ modkey }, "y", awful.placement.centered)
+	awful.key({ modkey }, "y", awful.placement.centered),
+
+    -- Quake terminal
+    awful.key({}, "F12", nil, function () quake:toggle() end),
+
+    awful.key({ alt }, "x", function() awesome.emit_signal("ui::powermenu:open") end)
 })
 
 client.connect_signal("request::default_mousebindings", function()
@@ -333,7 +352,7 @@ client.connect_signal("request::default_keybindings", function()
 end)
 
 -- Sloppy focus :
-client.connect_signal("mouse::enter", function(c)
-    c:activate { context = "mouse_enter", raise = true }
-end)
+-- client.connect_signal("mouse::enter", function(c)
+--     c:activate { context = "mouse_enter", raise = true }
+-- end)
 

@@ -1,6 +1,6 @@
 configuration{
     modi: "run,drun,window,combi";
-    font: "SF Pro Display Semibold 15";
+    font: "Iosevka Nerd Font Bold 15";
     show-icons: true;
     icon-theme: "Papirus";
     terminal: "alacritty";
@@ -14,9 +14,9 @@ configuration{
 
 * {
     fg: #BBC3C8;
-    bg: #1B1D24;
-    accent: #3498DB;
-    urgent: #DB3545;
+    bg: #221f26;
+    accent: #7b7484;
+    urgent: #7b7484;
 }
 
 #window {

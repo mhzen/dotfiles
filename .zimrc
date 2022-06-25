@@ -5,11 +5,10 @@ zmodule input
 zmodule termtitle
 zmodule utility
 
-zmodule skywind3000/z.lua
-zmodule peterhurford/up.zsh -s up.plugin.zsh
-zmodule trapd00r/LS_COLORS -s lscolors.sh
+zmodule skywind3000/z.lua --cmd 'eval "$(lua {}/z.lua --init zsh enhanced once fzf)"'
+zmodule trapd00r/LS_COLORS --on-pull 'dircolors -b LS_COLORS >! init.zsh' --source init.zsh
 
-zmodule zsh-users/zsh-completions -f src
+zmodule zsh-users/zsh-completions --fpath src
 zmodule completion
 zmodule zdharma-continuum/fast-syntax-highlighting
 zmodule zsh-users/zsh-autosuggestions
