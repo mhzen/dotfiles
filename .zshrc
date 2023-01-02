@@ -38,6 +38,9 @@ fi
 alias l='ls -lh --git'
 alias ll='l -a'
 (( $+commands[trash-put] )) && alias rm='trash-put'
+function mkcd() {
+  mkdir -p $@ && cd ${@:$#}
+}
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [[ ! -d $ZINIT_HOME ]]; then
