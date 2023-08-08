@@ -1,0 +1,14 @@
+if [[ ! -d ${ZDOTDIR:-~}/.antidote ]]; then
+  git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
+fi
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+antidote load
+
+autoload -Uz promptinit && promptinit && prompt pure
+
+alias :q='exit'
+alias refresh='exec zsh -l'
+export EDITOR="nvim"
+export TERMINAL="wezterm"
+path+=(~/.local/bin)
+export PATH

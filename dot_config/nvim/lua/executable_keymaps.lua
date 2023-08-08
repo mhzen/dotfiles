@@ -32,8 +32,8 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+-- keymap("n", "<S-l>", ":bnext<CR>", opts)
+-- keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Move text up and down
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
@@ -54,7 +54,41 @@ keymap("n", "<leader>n", ":set nu!<CR>", opts)
 keymap("n", "<leader>nn", ":set rnu!<CR>", opts)
 
 -- Neotree
-keymap("n", "<leader>e", ":Neotree focus toggle<CR><CR>", opts)
+-- keymap("n", "<leader>e", "<Cmd> Neotree focus toggle <CR>", opts)
+keymap("n", "<leader>e", "<Cmd> NvimTreeFocus <CR>", opts)
+keymap("n", "<C-n>", "<Cmd> NvimTreeToggle <CR>", opts)
+
+--- Barbar
+
+-- Move to previous/next
+keymap('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
+keymap('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+
+-- Re-order to previous/next
+keymap('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
+keymap('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
+-- Goto buffer in position...
+keymap('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
+keymap('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
+keymap('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
+keymap('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
+keymap('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
+keymap('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
+keymap('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
+keymap('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
+keymap('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
+keymap('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+-- Pin/unpin buffer
+keymap('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+-- Close buffer
+keymap('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+-- Magic buffer-picking mode
+keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+-- Sort automatically by...
+keymap('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
+keymap('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
+keymap('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
+keymap('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 
 -- Visual --
 -- Stay in indent mode

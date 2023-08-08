@@ -8,4 +8,3 @@ blankline.setup {
   buftype_exclude = { "terminal" },
   filetype_exclude = { "help", "terminal", "dashboard", "packer", "alpha" },
 }
-

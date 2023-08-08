@@ -1,0 +1,12 @@
+# .zsh_plugins.txt
+
+sindresorhus/pure kind:fpath
+agkozak/zsh-z
+belak/zsh-utils path:editor
+belak/zsh-utils path:history
+belak/zsh-utils path:utility
+zsh-users/zsh-completions
+belak/zsh-utils path:completion
+zdharma-continuum/fast-syntax-highlighting kind:defer
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-autosuggestions

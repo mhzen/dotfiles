@@ -33,7 +33,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 mason_lsp.setup({
   ensure_installed = {
-    "sumneko_lua",
+    "lua_ls",
   },
   automatic_installation = true
 })
@@ -45,8 +45,8 @@ mason_lsp.setup_handlers {
       capabilities = capabilities,
     }
   end,
-  ["sumneko_lua"] = function ()
-    lsp.sumneko_lua.setup {
+  ["lua_ls"] = function ()
+    lsp.lua_ls.setup {
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
