@@ -1,0 +1,36 @@
+fpath+=($ZDOTDIR/plugins/pure)
+autoload -U promptinit; promptinit
+prompt pure
+
+source ${ZDOTDIR:-~}/plugins/zsh-defer/zsh-defer.plugin.zsh
+
+zephyr_plugins=(
+  clipboard
+  color
+  completion
+  directory
+  editor
+  history
+  terminal
+  utility
+)
+
+zstyle ':zephyr:load' plugins $zephyr_plugins
+source ${ZDOTDIR:-~}/plugins/zephyr/zephyr.zsh
+
+fpath+=${ZDOTDIR:-~}/plugins/zsh-completions
+
+zsh-defer source ${ZDOTDIR:-~}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+zsh-defer source ${ZDOTDIR:-~}/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+zsh-defer source ${ZDOTDIR:-~}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+zsh-defer eval "$(zoxide init zsh)"
+
+alias ls='lsd'
+alias :q='exit'
+alias refresh='exec zsh -l'
+path+=(~/.local/bin)
+export PATH
