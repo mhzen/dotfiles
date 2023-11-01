@@ -50,11 +50,8 @@ return {
   },
   {
     'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
     event = 'BufReadPre',
-    opts = {
-      buftype_exclude = { "terminal" },
-      filetype_exclude = { "help", "terminal", "dashboard", "packer", "alpha" },
-    },
     config = true
   },
   {

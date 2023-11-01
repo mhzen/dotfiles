@@ -34,3 +34,5 @@ alias :q='exit'
 alias refresh='exec zsh -l'
 path+=(~/.local/bin)
 export PATH
+
+source /home/mham/.config/broot/launcher/bash/br
