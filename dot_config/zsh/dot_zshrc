@@ -5,13 +5,11 @@ prompt pure
 source ${ZDOTDIR:-~}/plugins/zsh-defer/zsh-defer.plugin.zsh
 
 zephyr_plugins=(
-  clipboard
   color
   completion
   directory
   editor
   history
-  terminal
   utility
 )
 
@@ -32,6 +30,7 @@ zsh-defer eval "$(zoxide init zsh)"
 alias ls='lsd'
 alias :q='exit'
 alias refresh='exec zsh -l'
+alias rm='echo "This is not the command you are looking for."; false'
 path+=(~/.local/bin)
 export PATH
 

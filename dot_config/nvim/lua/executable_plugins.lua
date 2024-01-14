@@ -1,16 +1,24 @@
 return {
   -- Eye Candy
+  -- {
+  --   'rose-pine/neovim',
+  --   name = 'rose-pine',
+  --   priority = 1000,
+  --   opts = {
+  --     disable_background = true,
+  --   },
+  --   config = function ()
+  --     vim.cmd.colorscheme "rose-pine"
+  --   end,
+  --   lazy = false
+  -- },
   {
-    'rose-pine/neovim',
-    name = 'rose-pine',
+    "folke/tokyonight.nvim",
+    lazy = false,
     priority = 1000,
-    opts = {
-      disable_background = true,
-    },
     config = function ()
-      vim.cmd.colorscheme "rose-pine"
+      vim.cmd([[colorscheme tokyonight]])
     end,
-    lazy = false
   },
   {
     'nvim-tree/nvim-web-devicons',
