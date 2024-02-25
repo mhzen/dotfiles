@@ -22,10 +22,14 @@ zsh-defer source ${ZDOTDIR:-~}/plugins/fast-syntax-highlighting/fast-syntax-high
 zsh-defer source ${ZDOTDIR:-~}/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 zsh-defer source ${ZDOTDIR:-~}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
 
 zsh-defer eval "$(zoxide init zsh)"
+# zsh-defer eval "$(atuin init zsh --disable-up-arrow)"
+zsh-defer eval "$(mcfly init zsh)"
+zsh-defer source /home/mham/.config/broot/launcher/bash/br
+zsh-defer function mkcd() { mkdir -p $@ && cd ${@:$#} }
 
 alias ls='lsd'
 alias :q='exit'
@@ -33,5 +37,3 @@ alias refresh='exec zsh -l'
 alias rm='echo "This is not the command you are looking for."; false'
 path+=(~/.local/bin)
 export PATH
-
-source /home/mham/.config/broot/launcher/bash/br
