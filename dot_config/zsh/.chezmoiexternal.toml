@@ -4,6 +4,12 @@
   exact = true
   stripComponents = 1
   refreshPeriod = "168h"
+["plugins/agkozak-zsh-prompt"]
+  type = "archive"
+  url = "https://github.com/agkozak/agkozak-zsh-prompt/archive/master.tar.gz"
+  exact = true
+  stripComponents = 1
+  refreshPeriod = "168h"
 ["plugins/zephyr"]
   type = "archive"
   url = "https://github.com/mattmc3/zephyr/archive/master.tar.gz"
