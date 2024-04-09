@@ -2,9 +2,11 @@
 # autoload -U promptinit; promptinit
 # prompt pure
 
-fpath+=($ZDOTDIR/plugins/agkozak-zsh-prompt)
-autoload -U promptinit; promptinit
-prompt agkozak-zsh-prompt
+# fpath+=($ZDOTDIR/plugins/agkozak-zsh-prompt)
+# autoload -U promptinit; promptinit
+# prompt agkozak-zsh-prompt
+
+source ${ZDOTDIR:-~}/plugins/powerlevel10k/powerlevel10k.zsh-theme
 
 source ${ZDOTDIR:-~}/plugins/zsh-defer/zsh-defer.plugin.zsh
 
@@ -26,7 +28,6 @@ zsh-defer source ${ZDOTDIR:-~}/plugins/fast-syntax-highlighting/fast-syntax-high
 zsh-defer source ${ZDOTDIR:-~}/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 zsh-defer source ${ZDOTDIR:-~}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-bindkey -v
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
@@ -38,6 +39,5 @@ zsh-defer function mkcd() { mkdir -p $@ && cd ${@:$#} }
 
 alias :q='exit'
 alias refresh='exec zsh -l'
-alias rm='echo "This is not the command you are looking for."; false'
 path+=(~/.local/bin)
 export PATH
