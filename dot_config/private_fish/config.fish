@@ -1,7 +1,24 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
+    set fish_greeting
 
-set -gx EDITOR neovim
-# set -gx QT_QPA_PLATFORMTHEME qt6ct
-set -gx QT_WAYLAND_DECORATION adwaita
+    # abbrs
+    abbr --add ls eza
+    abbr --add rt trash put
+    abbr --add lg lazygit
+
+    # functions
+    function mkcd
+        mkdir -pv $argv && cd $argv
+    end
+    function cheat
+        curl cht.sh/$argv
+    end
+
+    # envvars
+    set -gx EDITOR hx
+
+    # sources
+    zoxide init fish | source
+    mise activate fish | source
+    starship init fish | source
+end
