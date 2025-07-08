@@ -22,3 +22,8 @@ if status is-interactive
     mise activate fish | source
     starship init fish | source
 end
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /var/home/mhzen/.lmstudio/bin
+# End of LM Studio CLI section
+

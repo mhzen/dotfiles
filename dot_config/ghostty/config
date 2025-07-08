@@ -4,3 +4,4 @@ font-size = 14
 command = fish
 theme = gruvbox-material
 maximize = true
+gtk-titlebar-hide-when-maximized = true
