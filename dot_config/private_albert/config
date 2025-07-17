@@ -1,4 +1,6 @@
 [General]
+hotkey=
+showTray=false
 telemetry=false
 
 [application]
@@ -11,6 +13,33 @@ enabled=true
 enabled=true
 
 [calculator_qalculate]
+enabled=true
+
+[clipboard]
+enabled=true
+
+[datetime]
+enabled=true
+
+[path]
+enabled=false
+
+[python]
+enabled=true
+
+[python.locate]
+enabled=true
+
+[spotify]
+enabled=false
+
+[system]
+enabled=true
+
+[urlhandler]
+enabled=true
+
+[websearch]
 enabled=true
 
 [widgetsboxmodel]

@@ -2,7 +2,7 @@ if status is-interactive
     set fish_greeting
 
     # abbrs
-    abbr --add ls eza
+    command -vq eza && abbr --add ls eza
     abbr --add rt trash put
     abbr --add lg lazygit
 
@@ -18,12 +18,11 @@ if status is-interactive
     set -gx EDITOR hx
 
     # sources
-    zoxide init fish | source
-    mise activate fish | source
-    starship init fish | source
+    command -vq starship && starship init fish | source
+    command -vq zoxide && zoxide init fish | source
+    command -vq mise && mise activate fish | source
+    command -vq atuin && atuin init fish | source
+
+    # path
+    fish_add_path ~/.local/share/soar/bin
 end
-
-# Added by LM Studio CLI (lms)
-set -gx PATH $PATH /var/home/mhzen/.lmstudio/bin
-# End of LM Studio CLI section
-
