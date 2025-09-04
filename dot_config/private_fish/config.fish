@@ -10,7 +10,7 @@ if status is-interactive
     function mkcd
         mkdir -pv $argv && cd $argv
     end
-    function cheat
+    function ct
         curl cht.sh/$argv
     end
 

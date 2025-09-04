@@ -6,9 +6,9 @@
 
 # Usage
 ```
-sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply mhzen
+chezmoi init --apply git@github.com:mhzen/dotfiles.git # just apply
 //
-chezmoi init --apply mhzen
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply git@github.com:mhzen/dotfiles.git # bootstrap
 ```
 
 # Managed
