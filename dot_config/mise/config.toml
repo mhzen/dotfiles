@@ -2,6 +2,7 @@
 atuin = "latest"
 cargo-binstall = "latest"
 eza = "latest"
+fastfetch = "latest"
 fd = "latest"
 fzf = "latest"
 gh = "latest"
