@@ -19,7 +19,7 @@ if status is-interactive
 
     # sources
     test -d /home/linuxbrew/.linuxbrew && /home/linuxbrew/.linuxbrew/bin/brew shellenv | source
-    command -vq zoxide && zoxide init fish | source
     command -vq mise && mise activate fish | source
+    command -vq zoxide && zoxide init fish | source
     command -vq atuin && atuin init fish | source
 end

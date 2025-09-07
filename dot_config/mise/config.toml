@@ -1,0 +1,14 @@
+[tools]
+atuin = "latest"
+cargo-binstall = "latest"
+eza = "latest"
+fd = "latest"
+fzf = "latest"
+gh = "latest"
+"github:usagi-flow/evil-helix" = "latest"
+lazygit = "latest"
+rust = "latest"
+zoxide = "latest"
+
+[settings]
+experimental = true
