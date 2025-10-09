@@ -8,7 +8,8 @@ fzf = "latest"
 gh = "latest"
 "github:usagi-flow/evil-helix" = "latest"
 lazygit = "latest"
-rust = "latest"
+starship = "latest"
+yazi = "latest"
 zoxide = "latest"
 
 [settings]
