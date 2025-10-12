@@ -5,6 +5,7 @@ if status is-interactive
     command -vq eza && abbr --add ls eza
     abbr --add rt trash put
     abbr --add lg lazygit
+    abbr --add flatpakk flatpak --user
 
     # functions
     function mkcd
@@ -16,6 +17,7 @@ if status is-interactive
 
     # envvars
     set -gx EDITOR hx
+    set -gx MISE_IGNORED_CONFIG_PATHS "~/.local/share/chezmoi/mise.toml"
 
     # sources
     test -d /home/linuxbrew/.linuxbrew && /home/linuxbrew/.linuxbrew/bin/brew shellenv | source

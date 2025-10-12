@@ -6,11 +6,14 @@ fastfetch = "latest"
 fd = "latest"
 fzf = "latest"
 gh = "latest"
+"github:asciinema/asciinema" = "latest"
 "github:usagi-flow/evil-helix" = "latest"
 lazygit = "latest"
+rg = "latest"
 starship = "latest"
 yazi = "latest"
 zoxide = "latest"
 
 [settings]
 experimental = true
+ignored_config_paths = [ "/home/mhzen/.local/share/chezmoi" ]

@@ -76,7 +76,7 @@ config.keys = {
 if wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
   config.font = wezterm.font 'SpaceMono Nerd Font Mono'
   config.default_prog = { 'fish', '-l' }
-  config.use_fancy_tab_bar = false
+  -- config.use_fancy_tab_bar = false
   config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 elseif wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   config.default_prog = { 'pwsh.exe' }

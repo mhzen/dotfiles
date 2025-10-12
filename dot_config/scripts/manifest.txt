@@ -1,0 +1,32 @@
+# LinuxToys Manifest File
+# List the names of scripts, packages, or flatpaks to install sequentially, one per line
+# Lines starting with # are comments and will be ignored
+
+# System packages:
+vim
+podman
+podman-docker
+distrobox
+fish
+
+# Flatpaks:
+io.github.milkshiift.GoofCord
+com.rtosta.zapzap
+org.prismlauncher.PrismLauncher
+com.vysp3r.ProtonPlus
+com.brave.Browser
+com.usebottles.bottles
+org.gnome.World.PikaBackup
+
+# LinuxToys scripts:
+pdefaults
+mise
+code
+corefonts
+iwd
+lucidglyph
+preload
+gscope
+gsr
+lutris
+steam
