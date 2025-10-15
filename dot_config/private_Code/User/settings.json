@@ -1,0 +1,9 @@
+{
+    "telemetry.telemetryLevel": "off",
+    "security.workspace.trust.untrustedFiles": "open",
+    "window.title": "${folderPath} ${separator} ${activeEditorShort}",
+    "workbench.tree.renderIndentGuides": "always",
+    "editor.formatOnPaste": true,
+    "editor.guides.bracketPairs": "active",
+    "files.trimTrailingWhitespace": true
+}

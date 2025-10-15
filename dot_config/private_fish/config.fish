@@ -1,8 +1,11 @@
 if status is-interactive
     set fish_greeting
 
+    # path
+    fish_add_path ~/.local/bin
+
     # abbrs
-    command -vq eza && abbr --add ls eza
+    command -vq eza abbr --add ls eza
     abbr --add rt trash put
     abbr --add lg lazygit
     abbr --add flatpakk flatpak --user
@@ -17,12 +20,12 @@ if status is-interactive
 
     # envvars
     set -gx EDITOR hx
-    set -gx MISE_IGNORED_CONFIG_PATHS "~/.local/share/chezmoi/mise.toml"
+    set -gx MISE_IGNORED_CONFIG_PATHS "~/.local/share/chezmoi"
 
     # sources
     test -d /home/linuxbrew/.linuxbrew && /home/linuxbrew/.linuxbrew/bin/brew shellenv | source
     command -vq mise && mise activate fish | source
     command -vq starship && starship init fish | source
     command -vq zoxide && zoxide init fish | source
-    command -vq atuin && atuin init fish | source
+    # command -vq atuin && atuin init fish | source
 end

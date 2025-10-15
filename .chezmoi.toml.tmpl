@@ -1,4 +1,8 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $lat := promptStringOnce . "lat" "Latitude" -}}
+{{- $lon := promptStringOnce . "lon" "Longitude" -}}
 
 [data]
     email = {{ $email | quote }}
+    lat = {{ $lat }}
+    lon = {{ $lon }}

@@ -19,7 +19,7 @@ config.window_padding = {
   top = 0,
   bottom = 0,
 }
-config.leader = { key = 'a', mods = 'CTRL' }
+config.hide_tab_bar_if_only_one_tab = true
 config.keys = {
   {
     key = ':',
@@ -74,10 +74,10 @@ config.keys = {
 }
 
 if wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
-  config.font = wezterm.font 'SpaceMono Nerd Font Mono'
+  config.font = wezterm.font 'JetbrainsMono Nerd Font Mono'
   config.default_prog = { 'fish', '-l' }
   -- config.use_fancy_tab_bar = false
-  config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+  -- config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 elseif wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   config.default_prog = { 'pwsh.exe' }
   config.default_domain = 'WSL:Ubuntu'
