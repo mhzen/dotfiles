@@ -4,20 +4,6 @@ if status is-interactive
     # path
     fish_add_path ~/.local/bin
 
-    # abbrs
-    command -vq eza abbr --add ls eza
-    abbr --add rt trash put
-    abbr --add lg lazygit
-    abbr --add flatpakk flatpak --user
-
-    # functions
-    function mkcd
-        mkdir -pv $argv && cd $argv
-    end
-    function ct
-        curl cht.sh/$argv
-    end
-
     # envvars
     set -gx EDITOR hx
     set -gx MISE_IGNORED_CONFIG_PATHS "~/.local/share/chezmoi"
@@ -27,5 +13,18 @@ if status is-interactive
     command -vq mise && mise activate fish | source
     command -vq starship && starship init fish | source
     command -vq zoxide && zoxide init fish | source
-    # command -vq atuin && atuin init fish | source
+
+    # functions
+    function mkcd
+        mkdir -pv $argv && cd $argv
+    end
+    function ct
+        curl cht.sh/$argv
+    end
+
+    # abbrs
+    command -vq eza && abbr --add ls eza
+    abbr --add rt trash put
+    abbr --add lg lazygit
+    abbr --add flatpakk flatpak --userend
 end

@@ -11,6 +11,7 @@ gh = "latest"
 lazygit = "latest"
 rg = "latest"
 starship = "latest"
+uv = "latest"
 yazi = "latest"
 zoxide = "latest"
 
