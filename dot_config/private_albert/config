@@ -1,4 +1,5 @@
 [General]
+additional_path_entires=
 hotkey=
 showTray=false
 telemetry=false
@@ -15,6 +16,10 @@ enabled=true
 [calculator_qalculate]
 enabled=true
 
+[chromium]
+bookmarks_path=@Invalid()
+enabled=false
+
 [clipboard]
 enabled=true
 
@@ -22,16 +27,33 @@ enabled=true
 enabled=true
 
 [files]
-paths=@Invalid()
+enabled=true
+home\mhzen\Downloads\followSymlinks=false
+home\mhzen\Downloads\indexhidden=false
+home\mhzen\Downloads\maxDepth=255
+home\mhzen\Downloads\mimeFilters=inode/directory, application/*, audio/*, video/*, image/*
+home\mhzen\Downloads\nameFilters=@Invalid()
+home\mhzen\Downloads\scanInterval=5
+home\mhzen\Downloads\useFileSystemWatches=false
+index_file_path=false
+paths=/home/mhzen/Downloads
+trigger="' "
 
 [path]
-enabled=false
+enabled=true
 
 [python]
 enabled=true
 
-[python.locate]
+[python.aur]
+enabled=false
+
+[python.emoji]
 enabled=true
+global_handler_enabled=false
+
+[python.locate]
+enabled=false
 
 [spotify]
 enabled=false
