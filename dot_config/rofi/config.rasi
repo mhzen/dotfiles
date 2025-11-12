@@ -1,0 +1,8 @@
+configuration {
+    modi: "combi,window,drun,run,fd:~/.local/bin/rofi-fd,emoji:rofimoji";
+    combi-modi: "window,drun,run,fd,emoji";
+    icon-theme: "Papirus-Dark";
+    show-icons: true;
+}
+
+@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"

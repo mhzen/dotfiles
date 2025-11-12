@@ -2,6 +2,6 @@
 font-family = JetBrainsMono Nerd Font Mono
 font-size = 14
 command = fish
-theme = gruvbox-material
+theme = Gruvbox Dark
 maximize = true
 gtk-titlebar-hide-when-maximized = true
