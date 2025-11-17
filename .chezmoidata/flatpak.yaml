@@ -1,0 +1,4 @@
+packages:
+  flatpak:
+  - com.brave.Browser
+  - it.mijorus.gearlever

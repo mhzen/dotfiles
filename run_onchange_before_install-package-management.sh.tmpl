@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Arch Machine
+{{ if eq .chezmoi.hostname "9020" -}}
+
+# make sure installed: paru
+if ! command -v paru >/dev/null 2>&1; then
+  {{ .scripts.install_paru }}
+fi
+
+# install packages: paru
+paru -S --needed --batchinstall {{ range .packages.paru -}} {{ . }} {{ end -}}
+
+{{ end -}}
+
+# Ubuntu Machine
+{{ if eq .chezmoi.hostname "14360" -}}
+
+# make sure installed: code
+if ! command -v code >/dev/null 2>&1; then
+  {{ .scripts.install_code_ubuntu }}
+fi
+
+# make sure installed: ghostty
+if ! command -v ghostty >/dev/null 2>&1; then
+  {{ .scripts.install_ghostty_ubuntu }}
+fi
+
+# make sure installed: flatpak
+if ! command -v flatpak >/dev/null 2>&1; then
+  {{ .scripts.install_flatpak_ubuntu }}
+fi
+
+# install packages: flatpak
+flatpak install -y {{ range .packages.flatpak -}} {{ . }} {{ end -}}
+
+# make sure installed: brew
+command -v paru >/dev/null 2>&1 || {{ .scripts.install_brew }}; }}
+
+# install packages: brew
+brew bundle --file=/dev/stdin <<EOF
+{{ range .packages.brew -}}
+brew {{ . | quote }}
+{{ end -}}
+EOF
+
+{{ end -}}

@@ -1,0 +1,11 @@
+scripts:
+  install_paru: >
+    tmpdir=$(mktemp -d) &&
+    git clone https://aur.archlinux.org/paru-bin.git "$tmpdir" &&
+    (cd "$tmpdir" && makepkg -si --noconfirm)
+
+  install_vscode_ubuntu: >
+    wget -qO ~/Downloads/code.deb &&
+    sudo apt install ~/Downloads/code.deb
+
+  install_ghostty_ubuntu: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"

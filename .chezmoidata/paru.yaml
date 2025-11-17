@@ -1,0 +1,70 @@
+packages:
+  paru:
+  # hardware
+  - rtw89-dkms-git
+  
+  # i3wm essentials
+  - dex
+  - dunst
+  - feh
+  - flameshot
+  - gvfs
+  - i3-wm
+  - i3lock-color
+  - i3status-rust
+  - pavucontrol
+  - picom
+  - redshift
+  - rofi
+  - rofi-greenclip
+  - rofimoji
+  - thunar
+  - thunar-volman
+  - thunar-archive-plugin
+  - xsettingsd
+  - xss-lock
+
+  # terminal
+  - evil-helix-bin
+  - eza
+  - fastfetch
+  - fd
+  - fish
+  - fzf
+  - git
+  - jq
+  - mise
+  - starship
+  - zoxide
+
+  # devel
+  - visual-studio-code-bin  
+
+  # apps
+  - brave-bin
+  - ghostty
+  - mpv
+  - obsidian
+  - pika-backup
+  - qalculate-gtk
+  - transmission-gtk
+  - vesktop
+
+  # gaming
+  - gamemode
+  - prismlauncher
+  - protonplus
+  - steam
+
+  # utilities
+  - imagemagick
+  - pacman-contrib
+  - timeshift
+  - vim
+
+  # theming
+  - adw-gtk-theme
+  - noto-fonts-emoji
+  - papirus-icon-theme
+  - ttf-jetbrains-mono-nerd
+  - ttf-nerd-fonts-symbols

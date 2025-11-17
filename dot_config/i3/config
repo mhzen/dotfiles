@@ -8,7 +8,7 @@
 
 # Mod4 = Win key
 set $mod Mod4
-set $term wezterm
+set $term ghostty
 
 #############################
 # --> startups
@@ -159,8 +159,6 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
-
 
 bindsym $mod+r mode "resize"
 

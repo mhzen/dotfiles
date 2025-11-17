@@ -18,7 +18,7 @@ if status is-interactive
     function mkcd
         mkdir -pv $argv && cd $argv
     end
-    function ct
+    function cheat
         curl cht.sh/$argv
     end
 
@@ -26,5 +26,6 @@ if status is-interactive
     command -vq eza && abbr --add ls eza
     abbr --add rt trash put
     abbr --add lg lazygit
-    abbr --add flatpakk flatpak --userend
+    abbr --add flatpakk flatpak --user
+    abbr --add dotfiles cd ~/.local/share/chezmoi
 end
