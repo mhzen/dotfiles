@@ -32,6 +32,7 @@ packages:
   - fish
   - fzf
   - git
+  - glow
   - jq
   - mise
   - starship
