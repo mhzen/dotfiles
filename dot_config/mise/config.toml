@@ -1,17 +1,11 @@
 [tools]
-atuin = "latest"
-cargo-binstall = "latest"
 eza = "latest"
-fastfetch = "latest"
 fd = "latest"
 fzf = "latest"
 gh = "latest"
-"github:asciinema/asciinema" = "latest"
 "github:usagi-flow/evil-helix" = "latest"
 lazygit = "latest"
 rg = "latest"
-starship = "latest"
-uv = "latest"
 yazi = "latest"
 zoxide = "latest"
 

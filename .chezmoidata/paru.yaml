@@ -1,30 +1,9 @@
 packages:
   paru:
   # hardware
-  - rtw89-dkms-git
-  
-  # i3wm essentials
-  - dex
-  - dunst
-  - feh
-  - flameshot
-  - gvfs
-  - i3-wm
-  - i3lock-color
-  - i3status-rust
-  - pavucontrol
-  - picom
-  - redshift
-  - rofi
-  - rofi-greenclip
-  - rofimoji
-  - thunar
-  - thunar-volman
-  - thunar-archive-plugin
-  - xsettingsd
-  - xss-lock
+  # - rtw89-dkms-git
 
-  # terminal
+  # cli
   - evil-helix-bin
   - eza
   - fastfetch
@@ -36,10 +15,14 @@ packages:
   - jq
   - mise
   - starship
+  - yazi
   - zoxide
 
   # devel
+  - bash-language-server
   - visual-studio-code-bin  
+  - tinymist
+  - typst
 
   # apps
   - brave-bin
@@ -48,13 +31,10 @@ packages:
   - obsidian
   - pika-backup
   - qalculate-gtk
-  - transmission-gtk
-  - vesktop
 
   # gaming
   - gamemode
   - prismlauncher
-  - protonplus
   - steam
 
   # utilities
@@ -62,10 +42,3 @@ packages:
   - pacman-contrib
   - timeshift
   - vim
-
-  # theming
-  - adw-gtk-theme
-  - noto-fonts-emoji
-  - papirus-icon-theme
-  - ttf-jetbrains-mono-nerd
-  - ttf-nerd-fonts-symbols

@@ -5,3 +5,4 @@ command = fish
 theme = Gruvbox Dark
 maximize = true
 gtk-titlebar-hide-when-maximized = true
+shell-integration-features = ssh-env
