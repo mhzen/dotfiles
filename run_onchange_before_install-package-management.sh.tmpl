@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# EndeavourOS Machine
-{{ if eq .chezmoi.hostname "titan" -}}
+# CachyOS Machine
+{{ if eq .chezmoi.hostname "cachye" -}}
 
 # make sure installed: paru
 if ! command -v paru >/dev/null 2>&1; then
@@ -15,7 +15,7 @@ paru -S --needed --batchinstall {{ range .packages.paru -}} {{ . }} {{ end -}}
 # yay -S --needed --batchinstall {{ range .packages.paru -}} {{ . }} {{ end -}}{{ end -}}
 
 # Ubuntu Machine
-{{ if eq .chezmoi.hostname "14360" -}}
+{{ if eq .chezmoi.hostname "ekubuntu" -}}
 
 # make sure installed: code
 if ! command -v code >/dev/null 2>&1; then

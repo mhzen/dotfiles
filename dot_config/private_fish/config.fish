@@ -7,6 +7,7 @@ if status is-interactive
     # envvars
     set -gx EDITOR hx
     set -gx MISE_IGNORED_CONFIG_PATHS "~/.local/share/chezmoi"
+    set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/rbw/ssh-agent-socket"
 
     # sources
     test -d /home/linuxbrew/.linuxbrew && /home/linuxbrew/.linuxbrew/bin/brew shellenv | source

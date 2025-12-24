@@ -1,35 +1,34 @@
 packages:
   paru:
-  # hardware
-  # - rtw89-dkms-git
-
   # cli
-  - evil-helix-bin
+  # - evil-helix-bin
   - eza
   - fastfetch
   - fd
   - fish
   - fzf
   - git
-  - glow
-  - jq
-  - mise
-  - starship
+  # - glow
+  # - jq
+  # - mise
+  # - starship
   - yazi
   - zoxide
+  - neovim
 
   # devel
   - bash-language-server
   - visual-studio-code-bin  
-  - tinymist
-  - typst
+  # - tinymist
+  # - typst
 
   # apps
   - brave-bin
-  - ghostty
+  # - ghostty
+  - alacritty
   - mpv
   - obsidian
-  - pika-backup
+  # - pika-backup
   - qalculate-gtk
 
   # gaming
@@ -40,5 +39,5 @@ packages:
   # utilities
   - imagemagick
   - pacman-contrib
-  - timeshift
-  - vim
+  # - timeshift
+  # - vim
