@@ -10,4 +10,4 @@ cd ~ && sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply git@github.com:m
 ```
 # Machines
 - `mahameru` - CachyOS @ Optiplex 9020 🖥️
-- `rinjani` - PopOS 24.04 @ HP Pavilion 14 x360 💻️
+- `prau` - Fedora Workstation @ HP Pavilion 14 x360 💻️
